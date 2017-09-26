@@ -1,28 +1,27 @@
 import express from 'express';
-import rpiGpio from 'rpi-gpio';
+import { Gpio } from 'onoff';
 import GpioAdapter from '../gpio-promise';
 import config from '../../config';
 import middlewares from './middlewares';
 import routesMiddleware from './routes';
 
 const app = new express();
-const gpio = new GpioAdapter(rpiGpio);
+const gpioAdapter = new GpioAdapter(Gpio);
 
 config.doors.map((door) => {
   if (!!door.read) {
-    gpio.setup(door.read, rpiGpio.DIR_IN)
-      .catch(err => console.log(err));
+    gpioAdapter.setup(door.read, 'in', 'both');
   }
   if (!!door.write) {
-    gpio.setup(door.write, rpiGpio.DIR_OUT)
-      .catch(err => console.log(err));
+    gpioAdapter.setup(door.write, 'out');
   }
 });
 
-middlewares(app, config, gpio);
+middlewares(app, config, gpioAdapter);
 routesMiddleware(app, config);
 
-const server = app.listen(3000, (err) => {
+const server = app.listen(config.port, (err) => {
+  console.log('Ready to serve.');
   if (err) {
     console.log(err);
   }
@@ -31,10 +30,9 @@ const server = app.listen(3000, (err) => {
 const cleanup = () => {
   // Add shutdown logic here.
   console.log('Exiting...');
-  gpio.destroy(function () {
-    console.log('All pins unexported');
-  });
+  gpioAdapter.destroy();
   server.close();
+  process.exit();
 };
 process.on('exit', cleanup);
 process.on('SIGINT', cleanup);

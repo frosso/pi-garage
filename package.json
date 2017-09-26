@@ -12,6 +12,6 @@
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "express": "^4.15.4",
-    "rpi-gpio": "^0.8.1"
+    "onoff": "^1.1.7"
   }
 }
