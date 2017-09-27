@@ -1,7 +1,7 @@
 import express from 'express';
 import { Gpio } from 'onoff';
 import GpioAdapter from '../gpio-promise';
-import config from '../../config';
+import config from 'config';
 import middlewares from './middlewares';
 import routesMiddleware from './routes';
 

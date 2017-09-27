@@ -17,8 +17,9 @@ Just a dumb service that I use to check if my garage door is open or closed.
 ## Installation
 
 * Install `node` and `npm` in your Raspberry PI
-* Copy the project in your PI user's home directory
+* Copy the project on your Raspberry PI
 * Run `npm start`
+* You will be able to access the service on port `3000` by default (look at `config/default.js` for more options)
 
 ## API Endpoints
 
@@ -155,8 +156,6 @@ Just a dumb service that I use to check if my garage door is open or closed.
 
 ## TODOs
 
-* Abstract configuration using `config` package
-* Better documentation for configuration
 * Log of open/closed doors (through database? or just file? don't need anything fancy at the moment, unless the controller is going to handle many doors)
 * Integration of notification services (e.g. Pushbullet)
 * Integration for Google Assistant (ask for status, ask to control door)
