@@ -122,6 +122,35 @@ Just a dumb service that I use to check if my garage door is open or closed.
      26   "type": "object"
      27 }
     ```
+* PATCH `/api/door/:id`
+    * Description: opens and closes the door `id` being passed. If the `id` is valid and the door is configured to be opened, returns a `200` response status code. Otherwise returns `404`.
+    * Possible statuses: `200`, `404`
+    * Returns: JSON
+    * Format:
+    ``` 
+      1 {
+      2   "$schema": "http://json-schema.org/draft-04/schema#", 
+      3   "definitions": {}, 
+      4   "id": "http://example.com/example.json", 
+      5   "properties": {
+      6     "data": {
+      7       "id": "/properties/data", 
+      8       "properties": {
+      9         "id": {
+     10           "id": "/properties/data/properties/id", 
+     11           "type": "string"
+     12         }, 
+     18       }, 
+     19       "type": "object"
+     20     }, 
+     21     "error": {
+     22       "id": "/properties/error", 
+     23       "type": "boolean"
+     24     }
+     25   }, 
+     26   "type": "object"
+     27 }
+    ```
 
 
 ## TODOs
@@ -129,7 +158,6 @@ Just a dumb service that I use to check if my garage door is open or closed.
 * Abstract configuration using `config` package
 * Better documentation for configuration
 * Log of open/closed doors (through database? or just file? don't need anything fancy at the moment, unless the controller is going to handle many doors)
-* Open/Close door controls
 * Integration of notification services (e.g. Pushbullet)
 * Integration for Google Assistant (ask for status, ask to control door)
 * Android app (probably separate project)

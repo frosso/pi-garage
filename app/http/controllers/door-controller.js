@@ -26,3 +26,19 @@ export async function get(req, res) {
     error: false,
   });
 }
+
+export async function patch(req, res) {
+  if (!req.door.write) {
+    return res.status(404).json({ data: { msg: 'Cannot open/close door' }, error: true, });
+  }
+
+  // write 1 to the GPIO PIN, then write 0 right after it
+  await req.gpio.write(req.door.write, 1).then(() => req.gpio.write(req.door.write, 0));
+
+  return res.json({
+    data: {
+      id: req.door.id,
+    },
+    error: false,
+  });
+}

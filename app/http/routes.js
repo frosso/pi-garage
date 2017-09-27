@@ -10,5 +10,10 @@ export default function routesMiddleware(app, config) {
     doorControllers.get
   );
 
+  app.patch('/api/door/:id',
+    doorMiddleware({ doors: config.doors }),
+    doorControllers.patch
+  );
+
   app.get('/api/status', statusControllers.index);
 }
