@@ -71,3 +71,6 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# adding this because I have a private registry
+package-lock.json
