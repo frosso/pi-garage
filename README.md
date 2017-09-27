@@ -89,7 +89,7 @@ Just a dumb service that I use to check if my garage door is open or closed.
     40 }
     ```
 * GET `/api/door/:id`
-    * Description: returns details about the door `id` being passed. If the `id` is valid, returns a `200` response status code. Otherwise returns `404`
+    * Description: returns details about the door `id` being passed. If the `id` is valid and the door status can be read, returns a `200` response status code. Otherwise returns `404`.
     * Possible statuses: `200`, `404`
     * Returns: JSON
     * Format:

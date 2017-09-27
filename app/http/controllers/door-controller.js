@@ -14,6 +14,10 @@ export function index(req, res) {
 }
 
 export async function get(req, res) {
+  if (!req.door.read) {
+    return res.status(404).json({ data: { msg: 'Cannot read status on door' }, error: true, });
+  }
+
   return res.json({
     data: {
       id: req.door.id,
