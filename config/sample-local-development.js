@@ -2,6 +2,9 @@ const config = {
   // the port where the server will listen
   port: 3000,
 
+  // for local development, we're not going to load the GPIO library, which might break
+  development: true,
+
   // the list of doors available to be read/written
   // each server could potentially write to multiple doors
   doors: [
