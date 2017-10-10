@@ -2,6 +2,12 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 
 export default function serverMiddleware(app, config, gpio) {
+  // force the JSON content type on all request (for home assistant, the REST switch cannot set the headers)
+  app.use((req, res, next) => {
+    req.headers['content-type'] = 'application/json';
+    next();
+  });
+
   // NOTE: when using req.body, you must fully parse the request body
 //       before you call methodOverride() in your middleware stack,
 //       otherwise req.body will not be populated.
@@ -12,7 +18,6 @@ export default function serverMiddleware(app, config, gpio) {
     if (!req.body || typeof req.body !== 'object') {
       return;
     }
-
 
     if (!('_method' in req.body)) {
       return;
