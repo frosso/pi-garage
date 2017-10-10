@@ -33,7 +33,11 @@ export async function patch(req, res) {
   }
 
   // write 1 to the GPIO PIN, then write 0 right after it
-  await req.gpio.write(req.door.write, 1).then(() => req.gpio.write(req.door.write, 0));
+  await req.gpio.write(req.door.write, 1)
+    .then(res => new Promise(resolve => {
+      setTimeout(resolve, 300);
+    }))
+    .then(() => req.gpio.write(req.door.write, 0));
 
   return res.json({
     data: {
