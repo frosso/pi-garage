@@ -8,10 +8,13 @@ If you have access to read the status of your door, you can add the following to
 
 ```
 binary_sensor:
-  - platform: rest
+  - platform: command_line
     name: Garage door
     device_class: opening
-    resource: http://<address-of-your-pi-garage-installation>/api/door/<door-id>
+    command: python3 -c "import requests; print(requests.get('http://<address-of-your-pi-garage-installation>/api/door/<door-id>').text)"
+    scan_interval: 5
+    payload_on: 1
+    payload_off: 0
     value_template: '{{ value_json.data.status }}'
 ```
 
@@ -55,4 +58,4 @@ switch:
 
 This will create a switch component with the name of "Garage door" in your home assistant dashboard.
 
-Please be aware that by the time the door closes/opens, the status of the switch might be incorrect. The delay is due to the fact that Home Assistant needs to pull the status of the door via the `binary_sensor`, which takes some time.
+Please be aware that by the time the door closes/opens, the status of the switch might be temporarily incorrect. The delay is due to the fact that Home Assistant needs to pull the status of the door via the `binary_sensor`, which takes some time.
