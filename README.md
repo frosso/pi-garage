@@ -157,8 +157,8 @@ Just a dumb service that I use to check if my garage door is open or closed.
 ## TODOs
 
 * Log of open/closed doors (through database? or just file? don't need anything fancy at the moment, unless the controller is going to handle many doors)
-* Integration of notification services (e.g. Pushbullet)
+* ~Integration of notification services (e.g. Pushbullet)~ Can be performed with Home Assistant integration
 * Integration for Google Assistant (ask for status, ask to control door)
-* Android app (probably separate project)
+* Android app (in separate project)
 * Schematic diagram picture in the documentation
 * More detailed installation instructions
